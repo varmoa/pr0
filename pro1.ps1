@@ -83,7 +83,7 @@ function MostrarMenu {
         Clear-Host
         Write-Host "-------------##########------------"
         Write-Host ""
-        Write-Host "1. Instala SAP V8 y crea conexiones"
+        Write-Host "1. Instala SAPLogon y crea conexiones"
         Write-Host "2. Instala GIRAFE"
         Write-Host "3. Instala OpenSmart"
         Write-Host "4. Instala Condis"
