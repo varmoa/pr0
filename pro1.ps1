@@ -1,115 +1,111 @@
-@echo off
-Color 0A
+# Función para instalar SAP GUI V8 y configurar conexiones
+function InstalarSAPGUIV8 {
+    $url = "\\aest-repo1\paquetes\SAP GUI V8 win64"
+    Set-Location $url
+    Start-Process -FilePath ".\SAPGUIv8_64bits_20230606_1703.exe" -Wait
+    Start-Process -FilePath ".\GUI800_2-80006342.EXE" -Wait
 
-:menu
-ECHO -------------##########------------
-echo.
-echo 1. Instala SAP V8 y crea conexiones
-echo 2. Instala GIRAFE
-echo 3. Instala OpenSmart
-echo 4. Instala Condis
-echo 5. Instala Onefield
-echo 6. OFFICE 365
-echo 7. Todos los ACCESOS(iticket, Tapps, smart, etc)
-echo 8. COPY_PERFIL
-echo 9. DESHABILITAR SYSMAIN Y EXPERENCIA DEL USUARIO
-echo 10. Instala Google Earth
-echo 11. Instala Viewfinity Agent
-echo 12. Copiar carpetas (mas rapido)
-echo 13. Instala BentleyView
-echo 14. Instala VMWare client Vditeco
-echo 15. Abre CMD repositorio
-echo 16. Regedit suspension SSD
-echo 99. EXIT
-echo.
+    $UsuarioN = Read-Host "Ingresa el usuario"
+    $ruta = "C:\Users\$UsuarioN\AppData\Roaming\SAP\Common"
+    $url = "\\aest-repo1\paquetes\SAP GUI V8 win64\SAPFILES"
 
-set /p opcion= elije una opcion: 
-if not defined opcion goto :menu
-if %opcion% GTR 99 Exit
+    New-Item -Path $ruta -ItemType Directory -Force
+    Set-Location $ruta
 
-goto :opcion%opcion%
+    Copy-Item "$url\saplogon.ini" -Destination $ruta -Force
+    Copy-Item "$url\SAPUILandscape.xml" -Destination $ruta -Force
+    Copy-Item "$url\SAPUILandscapeGlobal.xml" -Destination $ruta -Force
 
-:SAPGUIV8
-@echo off
-pushd \\aest-repo1\paquetes
-cd "SAP GUI V8 win64"
-SAPGUIv8_64bits_20230606_1703.exe
-pause
-GUI800_2-80006342.EXE
-cd\
-ECHO ###########
-@echo off
-C:
-set /p UsuarioN=Ingresa el usuario:
-cd C:\Users\%UsuarioN%\AppData\Roaming
-MD SAP
-cd C:\Users\%UsuarioN%\AppData\Roaming\SAP
-MD Common
-CD C:\Users\%UsuarioN%\AppData\Roaming\SAP\Common
-pushd \\aest-repo1\paquetes
-cd "SAP GUI V8 win64\SAPFILES"
-copy /Y saplogon.ini C:\Users\%UsuarioN%\AppData\Roaming\SAP\Common
-copy /Y SAPUILandscape.xml C:\Users\%UsuarioN%\AppData\Roaming\SAP\Common
-copy /Y SAPUILandscapeGlobal.xml C:\Users\%UsuarioN%\AppData\Roaming\SAP\Common
-pause
-goto :menu
+    Read-Host "Presiona Enter para continuar..."
+}
 
-:GIRAFE
-@echo off
-pushd \\aest-repo1\paquetes
-cd girafe\girafe
-cscript.exe Install.vbs
-cd "Girafe"
-Girafe_Sesiones.EXE
-cd\
-pause
-goto :menu
+# Función para instalar GIRAFE
+function InstalarGIRAFE {
+    $url = "\\aest-repo1\paquetes\girafe\girafe"
+    Set-Location $url
+    cscript.exe Install.vbs
+    Set-Location "Girafe"
+    Start-Process .\Girafe_Sesiones.EXE
+    Read-Host "Presiona Enter para continuar..."
+}
 
-:OPEN
-@echo off
-pushd \\aest-repo1\paquetes
-cd "Open SmartFlex 7.5\Open SmartFlex 7.5 - x86x64\x64"
-start /wait .\OSFSetup.exe /S
-icacls "C:\Program Files (x86)\OpenSystems" /q /c /t /grant TODOS:(OI)(CI)F
-REM Extrae ejecutables Fixeados con Zip para mejorar transferencia
-start /wait "" 7z.exe x "OpenSmartFlex-patch.7z" -o"C:\Program Files (x86)\OpenSystems\OpenSmartFlex" -y
-REM Copia DLL Wondersoft
-copy /y .\WOIN3.dll "C:\Program Files (x86)\OpenSystems\OpenSmartFlex"
-cd\
-pause
-goto :menu
+# Función para instalar OpenSmartFlex
+function InstalarOpenSmartFlex {
+    $url = "\\aest-repo1\paquetes\Open SmartFlex 7.5\Open SmartFlex 7.5 - x86x64\x64"
+    Set-Location $url
+    Start-Process .\OSFSetup.exe -ArgumentList "/S" -Wait
+    icacls "C:\Program Files (x86)\OpenSystems" /q /c /t /grant TODOS:(OI)(CI)F
+    Start-Process "7z.exe" -ArgumentList "x 'OpenSmartFlex-patch.7z' -o'C:\Program Files (x86)\OpenSystems\OpenSmartFlex' -y" -Wait
+    Copy-Item ".\WOIN3.dll" -Destination "C:\Program Files (x86)\OpenSystems\OpenSmartFlex" -Force
+    Read-Host "Presiona Enter para continuar..."
+}
 
-:Condis
-@echo off
-pushd \\aest-repo1\paquetes
-cd "CONDIS Client C12 64 BITS NI - NEW\INSTALL" 
-CONDIS Client C12 64 BITS NI.EXE
-cd..
-cd "Condis Client C12 NRED\Install"
-Condis Client C12 NRED.EXE
-cd\
-pause
-goto :menu
+# Función para instalar Condis
+function InstalarCondis {
+    $url = "\\aest-repo1\paquetes\CONDIS Client C12 64 BITS NI - NEW\INSTALL"
+    Set-Location $url
+    Start-Process .\CONDIS Client C12 64 BITS NI.EXE -Wait
 
-:Onefield
-@echo off
-pushd \\aest-repo1\paquetes
-If NOT EXIST "C:\CSGSystems\" GoTo InstaladesdeCero
+    $url = "\\aest-repo1\paquetes\Condis Client C12 NRED\Install"
+    Set-Location $url
+    Start-Process .\Condis Client C12 NRED.EXE -Wait
 
-cscript.exe "Install_Update.vbs"
-icacls "C:\CSGSystems" /q /c /t /grant USUARIOS:(OI)(CI)M
-GOTO EXIT
+    Read-Host "Presiona Enter para continuar..."
+}
 
-:InstaladesdeCero
-cd "CableVision - Aplicaciones\CSG Onefield - Update 28-03-21"
-start /wait msiexec.exe /i "One Field.msi" /qn ALLUSERS=2
-cscript.exe "Install_Update.vbs"
-icacls "C:\CSGSystems" /q /c /t /grant USUARIOS:(OI)(CI)M
-cd\
-pause
-goto :menu
+# Función para instalar Onefield
+function InstalarOnefield {
+    $url = "\\aest-repo1\paquetes\CableVision - Aplicaciones\CSG Onefield - Update 28-03-21"
+    if (!(Test-Path "C:\CSGSystems")) {
+        Set-Location $url
+        Start-Process msiexec.exe -ArgumentList "/i 'One Field.msi' /qn ALLUSERS=2" -Wait
+    }
 
-...
+    $url = "\\aest-repo1\paquetes"
+    Set-Location $url
+    cscript.exe "Install_Update.vbs"
+    icacls "C:\CSGSystems" /q /c /t /grant USUARIOS:(OI)(CI)M
 
-:EXIT
-exit
+    Read-Host "Presiona Enter para continuar..."
+}
+
+# Función para instalar Office 365
+function InstalarOffice365 {
+    $url = "\\aest-repo1\paquetes\Microsoft Office 365\Semiannual64"
+    Set-Location $url
+    .\ConfigurationNueva64_con_uninstall_office2016.bat
+    Read-Host "Presiona Enter para continuar..."
+}
+
+# Función para mostrar el menú
+function MostrarMenu {
+    do {
+        Clear-Host
+        Write-Host "-------------##########------------"
+        Write-Host ""
+        Write-Host "1. Instala SAP V8 y crea conexiones"
+        Write-Host "2. Instala GIRAFE"
+        Write-Host "3. Instala OpenSmart"
+        Write-Host "4. Instala Condis"
+        Write-Host "5. Instala Onefield"
+        Write-Host "6. OFFICE 365"
+        Write-Host "99. EXIT"
+        Write-Host ""
+
+        $opcion = Read-Host "Elige una opción"
+
+        switch ($opcion) {
+            '1' { InstalarSAPGUIV8 }
+            '2' { InstalarGIRAFE }
+            '3' { InstalarOpenSmartFlex }
+            '4' { InstalarCondis }
+            '5' { InstalarOnefield }
+            '6' { InstalarOffice365 }
+            '99' { exit }
+            default { Write-Host "Opción no válida. Por favor, selecciona una opción válida." }
+        }
+    } while ($true)
+}
+
+# Llama a la función del menú
+MostrarMenu
