@@ -77,45 +77,35 @@ function InstalarOffice365 {
     Read-Host "Presiona Enter para continuar..."
 }
 
-function InstalarAcceso($ruta, $scriptVBS = $null, $icono = $null, $accesoDirecto = $null) {
-    $rutaCompleta = Join-Path -Path "\\aest-repo1\paquetes" -ChildPath $ruta
+# Función para instalar accesos
+function InstalarAccesos {
+    $rutas = @(
+        "UPGRADE y MANTENIMIENTO\SAP_Concur-acceso",
+        "UPGRADE y MANTENIMIENTO\SMART-acceso",
+        "Acceso Directo\Acceso Directo Tapps (nuevo)",
+        "UPGRADE y MANTENIMIENTO\Acceso Directo Itickets"
+    )
 
-    if ($scriptVBS) {
-        & cscript.exe (Join-Path -Path $rutaCompleta -ChildPath $scriptVBS)
+    foreach ($ruta in $rutas) {
+        $rutaCompleta = Join-Path -Path "\\aest-repo1\paquetes" -ChildPath $ruta
+        $scriptVBS = "Install.vbs"  # Se asume que todos usan el mismo script VBS
+        $icono = $null
+        $accesoDirecto = $null
+
+        if ($ruta -eq "Acceso Directo\Acceso Directo Tapps (nuevo)") {
+            $icono = "Tapps.ico"
+            $accesoDirecto = "Tapps.lnk"
+        }
+        elseif ($ruta -eq "UPGRADE y MANTENIMIENTO\Acceso Directo Itickets") {
+            $icono = "itickets.ico"
+            $accesoDirecto = "itickets.lnk"
+        }
+
+        InstalarAcceso -ruta $ruta -scriptVBS $scriptVBS -icono $icono -accesoDirecto $accesoDirecto
     }
 
-    if ($icono) {
-        Copy-Item -Path (Join-Path -Path $rutaCompleta -ChildPath $icono) -Destination "C:\Windows\" -Force
-    }
-
-    if ($accesoDirecto) {
-        Copy-Item -Path (Join-Path -Path $rutaCompleta -ChildPath $accesoDirecto) -Destination "C:\Users\Public\Desktop\" -Force
-    }
-
-    Write-Host "###########"
-
-    }
-
-# SAP Concur-acceso
-InstalarAcceso -ruta "UPGRADE y MANTENIMIENTO\SAP_Concur-acceso" -scriptVBS "Install.vbs"
-
-# SMART-acceso
-InstalarAcceso -ruta "UPGRADE y MANTENIMIENTO\SMART-acceso" -scriptVBS "Install.vbs"
-
-# Acceso Directo Tapps (nuevo)
-InstalarAcceso -ruta "Acceso Directo\Acceso Directo Tapps (nuevo)" -icono "Tapps.ico" -accesoDirecto "Tapps.lnk"
-
-# Acceso Directo Itickets
-InstalarAcceso -ruta "UPGRADE y MANTENIMIENTO\Acceso Directo Itickets" -icono "itickets.ico" -accesoDirecto "itickets.lnk"
-
-# Acceso Directo Teco XP
-InstalarAcceso -ruta "Acceso Directo\Acceso Directo Teco XP" -icono "TecoXP.ico" -accesoDirecto "Teco XP.url"
-
-# Pausa al final del script
-Write-Host "Presione cualquier tecla para continuar..."
-$host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-
-
+    Read-Host "Presiona Enter para continuar..."
+}
 
 # Función para mostrar el menú
 function MostrarMenu {
