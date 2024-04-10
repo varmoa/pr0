@@ -119,6 +119,7 @@ function MostrarMenu {
         Write-Host "4. Instala accesos"
         Write-Host "5. Instala Onefield"
         Write-Host "6. OFFICE 365"
+        Write-Host "7. Todavia nada"
         Write-Host "99. EXIT"
         Write-Host ""
 
