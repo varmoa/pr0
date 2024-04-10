@@ -137,7 +137,7 @@ function MostrarMenu {
             '1' { InstalarSAPGUIV8 }
             '2' { InstalarGIRAFE }
             '3' { InstalarOpenSmartFlex }
-            '4' { InstalarCondis }
+            '4' { InstalarAcceso }
             '5' { InstalarOnefield }
             '6' { InstalarOffice365 }
             '6' { InstalarAcceso }
