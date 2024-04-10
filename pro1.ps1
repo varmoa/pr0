@@ -138,5 +138,4 @@ function MostrarMenu {
     } while ($true)
 }
 
-# Llama a la función del menú
-MostrarMenu
+
