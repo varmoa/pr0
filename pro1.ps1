@@ -131,7 +131,6 @@ function MostrarMenu {
             '4' { InstalarAcceso }
             '5' { InstalarOnefield }
             '6' { InstalarOffice365 }
-            '6' { InstalarAcceso }
             '99' { exit }
             default { Write-Host "Opción no válida. Por favor, selecciona una opción válida." }
         }
