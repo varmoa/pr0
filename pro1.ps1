@@ -94,6 +94,8 @@ function InstalarAcceso($ruta, $scriptVBS = $null, $icono = $null, $accesoDirect
 
     Write-Host "###########"
 
+    }
+
 # SAP Concur-acceso
 InstalarAcceso -ruta "UPGRADE y MANTENIMIENTO\SAP_Concur-acceso" -scriptVBS "Install.vbs"
 
@@ -113,7 +115,6 @@ InstalarAcceso -ruta "Acceso Directo\Acceso Directo Teco XP" -icono "TecoXP.ico"
 Write-Host "Presione cualquier tecla para continuar..."
 $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
-}
 
 
 # Función para mostrar el menú
