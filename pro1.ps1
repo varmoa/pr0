@@ -83,8 +83,8 @@ function InstalarAccesos {
     Set-Location $url
     cscript.exe Install.vbs
     Write-Host "##########"
-    $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
-    Set-Location $url
+    $url1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
+    Set-Location $url1
     cscript.exe Install.vbs
      Read-Host "Presiona Enter para continuar..."
     }  
