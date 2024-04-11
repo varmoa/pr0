@@ -84,7 +84,7 @@ function InstalarAccesos {
     $url2 = "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Tapps (nuevo)"
     $url3 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\Acceso Directo Itickets"
     $url4 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso\x64"
-    $url5 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
+    $url5 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso\x64"
     $url6 = "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Teco XP"
     $rut2 = "C:\Windows\"
     $rut3 = "C:\Users\Public\Desktop\"
