@@ -79,33 +79,16 @@ function InstalarOffice365 {
 
 # Función para instalar accesos
 function InstalarAccesos {
-    $rutas = @(
-        "UPGRADE y MANTENIMIENTO\SAP_Concur-acceso",
-        "UPGRADE y MANTENIMIENTO\SMART-acceso",
-        "Acceso Directo\Acceso Directo Tapps (nuevo)",
-        "UPGRADE y MANTENIMIENTO\Acceso Directo Itickets"
-    )
-
-    foreach ($ruta in $rutas) {
-        $rutaCompleta = Join-Path -Path "\\aest-repo1\paquetes" -ChildPath $ruta
-        $scriptVBS = "Install.vbs"  # Se asume que todos usan el mismo script VBS
-        $icono = $null
-        $accesoDirecto = $null
-
-        if ($ruta -eq "Acceso Directo\Acceso Directo Tapps (nuevo)") {
-            $icono = "Tapps.ico"
-            $accesoDirecto = "Tapps.lnk"
-        }
-        elseif ($ruta -eq "UPGRADE y MANTENIMIENTO\Acceso Directo Itickets") {
-            $icono = "itickets.ico"
-            $accesoDirecto = "itickets.lnk"
-        }
-
-        InstalarAcceso -ruta $ruta -scriptVBS $scriptVBS -icono $icono -accesoDirecto $accesoDirecto
-    }
-
-    Read-Host "Presiona Enter para continuar..."
-}
+    $acceso1 = \\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\
+    Set-Location $acceso1
+     .\SAP_Concur-acceso
+    cscript.exe Install.vbs
+    Write-Host "##########"
+    Set-Location $acceso
+     .\SMART-acceso
+    cscript.exe Install.vbs
+     Read-Host "Presiona Enter para continuar..."
+    }  
 
 # Función para mostrar el menú
 function MostrarMenu {
@@ -129,7 +112,7 @@ function MostrarMenu {
             '1' { InstalarSAPGUIV8 }
             '2' { InstalarGIRAFE }
             '3' { InstalarOpenSmartFlex }
-            '4' { InstalarAcceso }
+            '4' { InstalarAccesos }
             '5' { InstalarOnefield }
             '6' { InstalarOffice365 }
             '99' { exit }
@@ -138,4 +121,5 @@ function MostrarMenu {
     } while ($true)
 }
 
-
+# Llama a la función del menú
+MostrarMenu
