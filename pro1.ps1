@@ -78,30 +78,39 @@ function InstalarOffice365 {
 }
 
 # Función para instalar accesos
-# function InstalarAccesos {
-#     $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso"
-#     Set-Location $url
-#     cscript.exe Install.vbs
-#     Write-Host "##########"
-#     $url1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
-#     Set-Location $url1
-#     cscript.exe Install.vbs
-#      Read-Host "Presiona Enter para continuar..."
-#     }  
 function InstalarAccesos {
-    $paquetes = @(
-        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso",
-        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
-    )
+    $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso"
+    #$url1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
+    $url2 = "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Tapps (nuevo)"
+    $url3 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\Acceso Directo Itickets"
+    $url4 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso\x64"
+    $rut2 = "C:\Windows\"
+    $rut3 = "C:\Users\Public\Desktop\"
+    Write-Host "SAPConcur"
+    Copy-Item "$url\SapConcur.ico" -Destination $rut2 -Force
+    Copy-Item "$url4\SAP Concur.lnk" -Destination $rut3 -Force
+    Write-Host "Tapps"
+    Copy-Item "$url2\Tapps.ico" -Destination $rut2 -Force
+    Copy-Item "$url2\Tapps.lnk" -Destination $rut3 -Force
+    Write-Host "Itickets"
+    Copy-Item "$url3\itickets.ico" -Destination $rut2 -Force
+    Copy-Item "$url2\itickets.lnk" -Destination $rut3 -Force
+    Read-Host "Presione cualquier tecla para continuar..."
+    }  
+# function InstalarAccesos {
+#     $paquetes = @(
+#         "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso",
+#         "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
+#     )
 
-    foreach ($url in $paquetes) {
-        Set-Location $url
-        cscript.exe Install.vbs
-        Write-Host "##########"
-    }
+#     foreach ($url in $paquetes) {
+#         Set-Location $url
+#         cscript.exe Install.vbs
+#         Write-Host "##########"
+#     }
 
-    Read-Host "Presiona Enter para continuar..."
-}
+#     Read-Host "Presiona Enter para continuar..."
+# }
 # Función para mostrar el menú
 function MostrarMenu {
     do {
