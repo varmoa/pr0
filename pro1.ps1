@@ -78,17 +78,30 @@ function InstalarOffice365 {
 }
 
 # Función para instalar accesos
+# function InstalarAccesos {
+#     $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso"
+#     Set-Location $url
+#     cscript.exe Install.vbs
+#     Write-Host "##########"
+#     $url1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
+#     Set-Location $url1
+#     cscript.exe Install.vbs
+#      Read-Host "Presiona Enter para continuar..."
+#     }  
 function InstalarAccesos {
-    $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso"
-    Set-Location $url
-    cscript.exe Install.vbs
-    Write-Host "##########"
-    $url1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
-    Set-Location $url1
-    cscript.exe Install.vbs
-     Read-Host "Presiona Enter para continuar..."
-    }  
+    $paquetes = @(
+        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso",
+        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
+    )
 
+    foreach ($url in $paquetes) {
+        Set-Location $url
+        cscript.exe Install.vbs
+        Write-Host "##########"
+    }
+
+    Read-Host "Presiona Enter para continuar..."
+}
 # Función para mostrar el menú
 function MostrarMenu {
     do {
