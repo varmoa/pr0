@@ -123,7 +123,7 @@ function InstalarAccesos {
         $nombreArchivo = (Get-ChildItem $url | Where-Object { $_.Extension -eq ".ico" }).Name
         $nombreAccesoDirecto = (Get-ChildItem $url | Where-Object { $_.Extension -eq ".lnk" }).Name
 
-        Write-Host "Instalando desde: $url"
+        Write-Host "Instalando accesos..."
 
         Copy-Item "$url\$nombreArchivo" -Destination $destinoWindows -Force
         Copy-Item "$url\$nombreAccesoDirecto" -Destination $destinoDesktop -Force
