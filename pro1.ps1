@@ -100,6 +100,7 @@ function InstalarAccesos {
     Write-Host "Itickets"
     Copy-Item "$url3\itickets.ico" -Destination $rut2 -Force
     Copy-Item "$url3\itickets.lnk" -Destination $rut3 -Force
+    Write-Host "TecoXP"
     Copy-Item "$url6\TecoXP.ico" -Destination $rut2 -Force
     Copy-Item "$url6\Teco XP.url" -Destination $rut3 -Force
     Read-Host "Presione cualquier tecla para continuar..."
