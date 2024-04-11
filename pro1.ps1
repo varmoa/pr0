@@ -79,12 +79,12 @@ function InstalarOffice365 {
 
 # Función para instalar accesos
 function InstalarAccesos {
-    $acceso1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\"
-    Set-Location $acceso1
+    $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO"
+    Set-Location $url
      .\SAP_Concur-acceso
     cscript.exe Install.vbs
     Write-Host "##########"
-    Set-Location $acceso
+    Set-Location $url
      .\SMART-acceso
     cscript.exe Install.vbs
      Read-Host "Presiona Enter para continuar..."
