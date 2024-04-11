@@ -78,59 +78,33 @@ function InstalarOffice365 {
 }
 
 # # Función para instalar accesos
-# function InstalarAccesos {
-#     $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso"
-#     $url1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
-#     $url2 = "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Tapps (nuevo)"
-#     $url3 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\Acceso Directo Itickets"
-#     $url4 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso\x64"
-#     $url5 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso\x64"
-#     $url6 = "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Teco XP"
-#     $rut2 = "C:\Windows\"
-#     $rut3 = "C:\Users\Public\Desktop\"
-#     Write-Host "SAPConcur"
-#     Copy-Item "$url\SapConcur.ico" -Destination $rut2 -Force
-#     Copy-Item "$url4\SAP Concur.lnk" -Destination $rut3 -Force
-#     Write-Host "Smart"
-#     Copy-Item "$url1\Smart.ico" -Destination $rut2 -Force
-#     Copy-Item "$url5\Smart.lnk" -Destination $rut3 -Force
-#     Write-Host "Tapps"
-#     Copy-Item "$url2\Tapps.ico" -Destination $rut2 -Force
-#     Copy-Item "$url2\Tapps.lnk" -Destination $rut3 -Force
-#     Write-Host "Itickets"
-#     Copy-Item "$url3\itickets.ico" -Destination $rut2 -Force
-#     Copy-Item "$url3\itickets.lnk" -Destination $rut3 -Force
-#     Write-Host "TecoXP"
-#     Copy-Item "$url6\TecoXP.ico" -Destination $rut2 -Force
-#     Copy-Item "$url6\Teco XP.url" -Destination $rut3 -Force
-#     Read-Host "Presione cualquier tecla para continuar..."
-#     }  
 function InstalarAccesos {
-    $urls = @(
-        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso",
-        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso",
-        "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Tapps (nuevo)",
-        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\Acceso Directo Itickets",
-        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso\x64",
-        "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso\x64",
-        "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Teco XP"
-    )
-
-    $destinoWindows = "C:\Windows\"
-    $destinoDesktop = "C:\Users\Public\Desktop\"
-
-    foreach ($url in $urls) {
-        $nombreArchivo = (Get-ChildItem $url | Where-Object { $_.Extension -eq ".ico" }).Name
-        $nombreAccesoDirecto = (Get-ChildItem $url | Where-Object { $_.Extension -eq ".lnk" }).Name
-
-        Write-Host "Instalando accesos..."
-
-        Copy-Item "$url\$nombreArchivo" -Destination $destinoWindows -Force
-        Copy-Item "$url\$nombreAccesoDirecto" -Destination $destinoDesktop -Force
-    }
-
+    $url = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso"
+    $url1 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso"
+    $url2 = "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Tapps (nuevo)"
+    $url3 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\Acceso Directo Itickets"
+    $url4 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SAP_Concur-acceso\x64"
+    $url5 = "\\aest-repo1\paquetes\UPGRADE y MANTENIMIENTO\SMART-acceso\x64"
+    $url6 = "\\aest-repo1\paquetes\Acceso Directo\Acceso Directo Teco XP"
+    $rut2 = "C:\Windows\"
+    $rut3 = "C:\Users\Public\Desktop\"
+    Write-Host "SAPConcur"
+    Copy-Item "$url\SapConcur.ico" -Destination $rut2 -Force
+    Copy-Item "$url4\SAP Concur.lnk" -Destination $rut3 -Force
+    Write-Host "Smart"
+    Copy-Item "$url1\Smart.ico" -Destination $rut2 -Force
+    Copy-Item "$url5\Smart.lnk" -Destination $rut3 -Force
+    Write-Host "Tapps"
+    Copy-Item "$url2\Tapps.ico" -Destination $rut2 -Force
+    Copy-Item "$url2\Tapps.lnk" -Destination $rut3 -Force
+    Write-Host "Itickets"
+    Copy-Item "$url3\itickets.ico" -Destination $rut2 -Force
+    Copy-Item "$url3\itickets.lnk" -Destination $rut3 -Force
+    Write-Host "TecoXP"
+    Copy-Item "$url6\TecoXP.ico" -Destination $rut2 -Force
+    Copy-Item "$url6\Teco XP.url" -Destination $rut3 -Force
     Read-Host "Presione cualquier tecla para continuar..."
-}
+    }  
 
 # Función para mostrar el menú
 function MostrarMenu {
