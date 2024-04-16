@@ -106,6 +106,23 @@ function InstalarAccesos {
     Read-Host "Presione cualquier tecla para continuar..."
     }  
 
+    # Función para copiar perfil de usuario
+function CopyPerfil {
+    # Solicitar entrada del usuario
+    $Unidad = Read-Host "Ingrese la unidad disco anterior:"
+    $UsuarioA = Read-Host "Ingresa el usuario anterior:"
+    $UsuarioN = Read-Host "Ingresa el usuario nuevo:"
+    $UsuC = "C:\Users"
+    Copy-Item "$Unidad\Users\$UsuarioA\Desktop" -Destination "$UsuC\$UsuarioN\Desktop" -Force -Recurse -Container
+    Copy-Item "$Unidad\Users\$UsuarioA\Documents" -Destination "$UsuC\$UsuarioN\Documents" -Force -Recurse -Container
+    Copy-Item "$Unidad\Users\$UsuarioA\Downloads" -Destination "$UsuC\$UsuarioN\Downloads" -Force -Recurse -Container
+    Copy-Item "$Unidad\Users\$UsuarioA\Pictures" -Destination "$UsuC\$UsuarioN\Pictures" -Force -Recurse -Container
+    Copy-Item "$Unidad\Users\$UsuarioA\Favorites" -Destination "$UsuC\$UsuarioN\Favorites" -Force -Recurse -Container
+    Copy-Item "$Unidad\Users\$UsuarioA\AppData\Roaming\Centrify" -Destination "$UsuC\$UsuarioN\AppData\Roaming\Centrify" -Force -Recurse -Container
+    Copy-Item "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default" -Destination "$UsuC\$UsuarioN\AppData\Local\Google\Chrome\User Data\Default" -Force -Recurse -Container -Exclude "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Service Worker" , "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Cache" , "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Code Cache"
+    Read-Host "Presiona Enter para continuar..."
+}
+
 # Función para mostrar el menú
 function MostrarMenu {
     do {
@@ -118,7 +135,7 @@ function MostrarMenu {
         Write-Host "4. Instala accesos"
         Write-Host "5. Instala Onefield"
         Write-Host "6. OFFICE 365"
-        Write-Host "7. Todavia nada"
+        Write-Host "7. Copy perfil"
         Write-Host "99. EXIT"
         Write-Host ""
 
@@ -131,6 +148,7 @@ function MostrarMenu {
             '4' { InstalarAccesos }
             '5' { InstalarOnefield }
             '6' { InstalarOffice365 }
+            '7' { CopyPerfil }
             '99' { exit }
             default { Write-Host "Opción no válida. Por favor, selecciona una opción válida." }
         }
@@ -139,3 +157,5 @@ function MostrarMenu {
 
 # Llama a la función del menú
 MostrarMenu
+
+
