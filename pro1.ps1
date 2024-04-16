@@ -1,3 +1,4 @@
+$Host.UI.RawUI.ForegroundColor = "Green"
 # Función para instalar SAP GUI V8 y configurar conexiones
 function InstalarSAPGUIV8 {
     $url = "\\aest-repo1\paquetes\SAP GUI V8 win64"
@@ -135,16 +136,18 @@ function CopyPerfil {
 function MostrarMenu {
     do {
         Clear-Host
-        Write-Host "-------------##########------------"
-        Write-Host ""
-        Write-Host "1. Instala SAPLogon y crea conexiones"
-        Write-Host "2. Instala GIRAFE"
-        Write-Host "3. Instala OpenSmart"
-        Write-Host "4. Instala accesos"
-        Write-Host "5. Instala Onefield"
-        Write-Host "6. OFFICE 365"
-        Write-Host "7. Copy perfil"
-        Write-Host "99. EXIT"
+        Write-Host "****************PROCESSULTRA*******************************" -ForegroundColor White
+        Write-Host "
+        Write-Host "            1. Instala SAPLogon y crea conexiones"
+        Write-Host "            2. Instala GIRAFE"
+        Write-Host "            3. Instala OpenSmart"
+        Write-Host "            4. Instala accesos"
+        Write-Host "            5. Instala Onefield"
+        Write-Host "            6. OFFICE 365"
+        Write-Host "            7. Copy perfil"
+        Write-Host "            99. EXIT"
+        Write-Host " 
+        Write-Host "***********************************************************" -ForegroundColor White
         Write-Host ""
 
         $opcion = Read-Host "Elige una opción"
