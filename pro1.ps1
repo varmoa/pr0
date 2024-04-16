@@ -136,18 +136,33 @@ function CopyPerfil {
 function MostrarMenu {
     do {
         Clear-Host
-        Write-Host "****************PROCESSULTRA*******************************" -ForegroundColor White
-        Write-Host "
-        Write-Host "            1. Instala SAPLogon y crea conexiones"
-        Write-Host "            2. Instala GIRAFE"
-        Write-Host "            3. Instala OpenSmart"
-        Write-Host "            4. Instala accesos"
-        Write-Host "            5. Instala Onefield"
-        Write-Host "            6. OFFICE 365"
-        Write-Host "            7. Copy perfil"
-        Write-Host "            99. EXIT"
-        Write-Host " 
-        Write-Host "***********************************************************" -ForegroundColor White
+        Write-Host ""
+        Write-Host "*********************************  PROCESSULTRA  *******************************" -ForegroundColor White
+        Write-Host ""
+
+        # Opciones del menú
+        $opciones = @(
+            "1. Instala SAPLogon y crea conexiones",
+            "2. Instala GIRAFE",
+            "3. Instala OpenSmart",
+            "4. Instala accesos",
+            "5. Instala Onefield",
+            "6. OFFICE 365",
+            "7. Copy perfil",
+            "99. EXIT"
+        )
+
+        # Obtener el ancho máximo de las opciones
+        $anchoMaximo = ($opciones | Measure-Object -Property Length -Maximum).Maximum
+
+        # Centrar y mostrar cada opción del menú
+        foreach ($opcion in $opciones) {
+            $opcionCentrada = $opcion.PadLeft(($opcion.Length + $anchoMaximo) / 2)
+            Write-Host $opcionCentrada
+        }
+
+        Write-Host ""
+        Write-Host "********************************************************************************" -ForegroundColor White
         Write-Host ""
 
         $opcion = Read-Host "Elige una opción"
