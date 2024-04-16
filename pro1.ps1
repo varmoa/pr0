@@ -113,13 +113,21 @@ function CopyPerfil {
     $UsuarioA = Read-Host "Ingresa el usuario anterior:"
     $UsuarioN = Read-Host "Ingresa el usuario nuevo:"
     $UsuC = "C:\Users"
-    Copy-Item "$Unidad\Users\$UsuarioA\Desktop" -Destination "$UsuC\$UsuarioN\Desktop" -Force -Recurse -Container
-    Copy-Item "$Unidad\Users\$UsuarioA\Documents" -Destination "$UsuC\$UsuarioN\Documents" -Force -Recurse -Container
-    Copy-Item "$Unidad\Users\$UsuarioA\Downloads" -Destination "$UsuC\$UsuarioN\Downloads" -Force -Recurse -Container
-    Copy-Item "$Unidad\Users\$UsuarioA\Pictures" -Destination "$UsuC\$UsuarioN\Pictures" -Force -Recurse -Container
-    Copy-Item "$Unidad\Users\$UsuarioA\Favorites" -Destination "$UsuC\$UsuarioN\Favorites" -Force -Recurse -Container
-    Copy-Item "$Unidad\Users\$UsuarioA\AppData\Roaming\Centrify" -Destination "$UsuC\$UsuarioN\AppData\Roaming\Centrify" -Force -Recurse -Container
-    Copy-Item "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default" -Destination "$UsuC\$UsuarioN\AppData\Local\Google\Chrome\User Data\Default" -Force -Recurse -Container -Exclude "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Service Worker" , "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Cache" , "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Code Cache"
+    try {
+        Copy-Item "$Unidad\Users\$UsuarioA\Desktop" -Destination "$UsuC\$UsuarioN\Desktop" -Force -Recurse -Container
+        Copy-Item "$Unidad\Users\$UsuarioA\Documents" -Destination "$UsuC\$UsuarioN\Documents" -Force -Recurse -Container
+        Copy-Item "$Unidad\Users\$UsuarioA\Downloads" -Destination "$UsuC\$UsuarioN\Downloads" -Force -Recurse -Container
+        Copy-Item "$Unidad\Users\$UsuarioA\Pictures" -Destination "$UsuC\$UsuarioN\Pictures" -Force -Recurse -Container
+        Copy-Item "$Unidad\Users\$UsuarioA\Favorites" -Destination "$UsuC\$UsuarioN\Favorites" -Force -Recurse -Container
+        Copy-Item "$Unidad\Users\$UsuarioA\AppData\Roaming\Centrify" -Destination "$UsuC\$UsuarioN\AppData\Roaming\Centrify" -Force -Recurse -Container
+        Copy-Item "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default" -Destination "$UsuC\$UsuarioN\AppData\Local\Google\Chrome\User Data\Default" -Force -Recurse -Container -Exclude "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Service Worker" , "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Cache" , "$Unidad\Users\$UsuarioA\AppData\Local\Google\Chrome\User Data\Default\Code Cache"
+        # Mostrar mensaje de copia exitosa
+        Write-Host "Copia exitosa"
+    }
+    catch {
+        # Mostrar mensaje de copia con errores
+        Write-Host "Copia con errores"
+    }
     Read-Host "Presiona Enter para continuar..."
 }
 
